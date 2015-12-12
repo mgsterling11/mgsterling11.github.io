@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: super, | Adventures in code-land]]></title>
+  <link href="http://mgsterling11.github.io/blog/categories/super/atom.xml" rel="self"/>
+  <link href="http://mgsterling11.github.io/"/>
+  <updated>2015-12-11T20:13:10-05:00</updated>
+  <id>http://mgsterling11.github.io/</id>
+  <author>
+    <name><![CDATA[Michael Sterling]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Super is Super Duper]]></title>
+    <link href="http://mgsterling11.github.io/blog/2015/10/19/super-is-super-duper/"/>
+    <updated>2015-10-19T22:03:52-04:00</updated>
+    <id>http://mgsterling11.github.io/blog/2015/10/19/super-is-super-duper</id>
+    <content type="html"><![CDATA[<p>As we build programs, we&rsquo;ll often find ourselves revising the blocks and compoments within our method bodies so we can improve their functionality, abstract them away, or bolster them for upscaling. By the same token, we&rsquo;ll break out functionality into multiple methods within a class, or even into new classes and modules to make the original methods more widely available to other objects in our program.</p>
+
+<p>Often, several classes or objects in a program will share method names (the initialize method in classes, as an obvious example), but by calling a method on a certain object we give Ruby the necessary lookup directions to access the right code. Knowing how method lookup works can be quite helpful, even if only so that you&rsquo;re aware of what you&rsquo;re calling when and where you call it. It&rsquo;s pretty straightforward stuff, but as a recap:</p>
+
+<p>When an object receives a message, it first looks within:</p>
+
+<ul>
+<li>Its own class to see if the method is contained there;</li>
+<li>If not, it moves on to modules mixed into its class (in reverse order of their inclusion);</li>
+<li>Next, its superclass;</li>
+<li>Then, modules mixed into the superclass (again in reverse order of their inclusion);</li>
+<li>and then all the way up to Object and BasicObject.</li>
+</ul>
+
+
+<p>A Ruby function called &ldquo;super&rdquo; makes method lookup even more interesting. Super can be cleverly employed through modules or class inheritance to yield some potentially useful results. When you call it within a method, Ruby will work its way up the method lookup chain to find another method with the same name, and will run the code contained there.</p>
+
+<p>Here&rsquo;s a quick basic example of an instance where a class and a module share method names, <em>receive_treat</em>, enabling both methods to be mixed together when super is called:</p>
+
+<pre><code class="ruby USING RUBY'S SUPER KEYWORD">module GiveTreat
+  def receive_treat
+    puts "One treat for you!"
+  end
+end
+
+class Dog
+  include GiveTreat
+  def receive_treat
+    puts "Give me a treat!"
+    puts "Now, dammit!"
+    super
+    puts "I'm one happy pup!"
+  end
+end
+
+happy_pup = Dog.new
+happy_pup.receive_treat
+</code></pre>
+
+<p>Luckily for this pup, the output would be:</p>
+
+<p><em>Give me a treat!</em> / <em>Now, dammit!</em> / <em>One treat for you!</em> / <em>I&rsquo;m one happy pup!</em></p>
+
+<p>Another quick one, this time with class inheritance instead of a module:</p>
+
+<pre><code class="ruby USING RUBY'S SUPER KEYWORD">class Animal
+  def eat
+    "I eat"
+  end
+end
+
+class Rat &lt; Animal
+  def eat
+    super + " pizza"
+  end
+end
+
+class Bird &lt; Animal
+  def eat
+    super + " worms"
+  end
+end
+
+class Dog &lt; Animal
+  def eat
+    super + " puppy chow"
+  end
+end
+
+puts Rat.new.eat
+puts Bird.new.eat
+puts Dog.new.eat
+</code></pre>
+
+<p>These return:</p>
+
+<p><em>I eat pizza</em> / <em>I eat worms</em> / <em>I eat puppy chow</em></p>
+
+<p>So, these are pretty silly, for sure, and it begs the question: when does super actually get used? Even more puzzling to me, <em>why would I <strong>ever</strong> use this</em>?</p>
+
+<p>Further reading demonstrated that super can be somewhat more useful (as most things are in coding), if used like this, perhaps:</p>
+
+<p>When a class object is inherited from a parent class, super can be used to instantiate the new class object with  additional or modified instance variables. Let&rsquo;s take, for example, a parent cafeteria object in a school cafeteria app that other cafeteria objects might inherit from:</p>
+
+<pre><code class="ruby CAFETERIA PARENT OBJECT">class Cafeteria
+  def initialize
+    @cooks = 10
+    @stoves = 5
+    @pots = 10
+    @pans = 10
+  end
+
+  def make_food
+    ...    
+  end
+
+  def clean_dishes
+    ...
+  end
+end
+
+class FlatironCafeteria &lt; Cafeteria
+  def initialize
+    super
+    @stoves = 1
+    @microwave = 1
+    @coffee_maker_that_sort_of_works = 1
+  end
+end
+</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code class="ruby CAFETERIA OBJECTS">  Cafeteria.new:
+  &lt;Cafeteria:0x007fb67c86e360 @cooks=10, @stoves=5, @pots=10, @pans=10&gt; 
+
+  FlatironCafeteria.new:
+  &lt;FlatironCafeteria:0x007fb5cc3bfb58 @cooks=10, @stoves=1, @pots=10, @pans=10, @microwave=1, @coffee_maker_that_sort_of_works=1&gt; 
+</code></pre>
+
+<p>In this case, when FlatironCafeteria is initialized using super (so Ruby knows to check the intialize method within FlatironCafeteria <em>and</em> Cafeteria), FlaitronCafeteria is initalized with all of Cafeteria&rsquo;s objects and a few newer instance variables of its own &ndash; mainly that coffee maker.</p>
+
+<p>If we didn&rsquo;t pass super in the FlatironCafeteria initialize method, though, the result would have been:</p>
+
+<pre><code class="ruby CAFETERIA OBJECTS">Cafeteria.new
+&lt;Cafeteria:0x007fc954866e40 @cooks=10, @stoves=5, @pots=10, @pans=10&gt; 
+FlatironCafeteria.new
+&lt;FlatironCafeteria:0x007fc95486fec8 @microwave=1, @coffee_maker_that_sort_of_works=1&gt; 
+</code></pre>
+
+<p>As you can see, FlatironCafeteria received none of Cafeteria&rsquo;s instance variables. Depending on our program, we may want new class objects to be initialized with their parent class&rsquo;s instance variables &ndash; super makes that happen.</p>
+
+<p>These are very basic portrayals of super usage, but this not-so-little tool can certainly come in handy when building additional functionality into our classes, modules, and programs.</p>
+
+<p>To conclude:</p>
+
+<p>It&rsquo;s a bird! It&rsquo;s a plane! It&rsquo;s&hellip; <strong>super</strong> <em>!</em></p>
+
+<p><img class="center <a" src="href="http://sensacionalista.uol.com.br/wp-content/uploads/2013/04/superman-cat-1.jpeg">http://sensacionalista.uol.com.br/wp-content/uploads/2013/04/superman-cat-1.jpeg</a>" width="400" title="&lsquo;SuperCat&rsquo; &lsquo;An image of a cat that can save the day&rsquo;" ></p>
+]]></content>
+  </entry>
+  
+</feed>
