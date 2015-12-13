@@ -16,3 +16,6 @@ The tech world drew me in when I forged a relationship between my company and a 
 <p>
 I made the move to Flatiron School to learn to code professionally and jump into a new career. I'm looking forward to contributing to many great projects and initiatives.
 </p>
+<p>
+Thanks for stopping by!
+</p>
