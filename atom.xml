@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Adventures in code-land]]></title>
+  <link href="http://mgsterling11.github.io/atom.xml" rel="self"/>
+  <link href="http://mgsterling11.github.io/"/>
+  <updated>2015-12-13T17:25:10-05:00</updated>
+  <id>http://mgsterling11.github.io/</id>
+  <author>
+    <name><![CDATA[Michael Sterling]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Approach to interviews]]></title>
+    <link href="http://mgsterling11.github.io/blog/2015/11/23/approach-to-interviews/"/>
+    <updated>2015-11-23T22:08:11-05:00</updated>
+    <id>http://mgsterling11.github.io/blog/2015/11/23/approach-to-interviews</id>
+    <content type="html"><![CDATA[<p>We&rsquo;re now over two thirds of the way through our Flatiron experience. As we continue to barrel ahead through new material, we&rsquo;re confronting the reality that we&rsquo;ll all be on the job market very(!) soon, and will need to be representing ourselves as professional, ableit beginner, programmers. This can be pretty daunting, for many reasons. Many current developers experience Imposter Syndrome, the classic &ldquo;everyone else is better than me&rdquo; mindset, so it&rsquo;s easy to imagine a bootcamp grad can experience the same misgivings.</p>
+
+<p><img class="center" src="https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2012/06/07/CapitalBusiness/Graphics/careercoach11.jpg?uuid=DAAziLDWEeGw96SQqoz3hw" width="700" title="'" ></p>
+
+<p>As we&rsquo;re heading toward the finish line for the program, I&rsquo;ve been thinking a lot about the interview process. To better prepare for the techinical compoment,  I&rsquo;ve been working hard to incorporate better habits (i.e. best practices) not only into my code, but the way I approach development, problem solving, and finding a best solution/algorithm.</p>
+
+<p>Gayle Laakmann McDowell, author of CRACKING THE CODING INTERVIEW, offers excellent advice for all parts of the job interview (especially the technical component(s). The book, which has been recommended as a must-read by every developer I&rsquo;ve spoken with, is one I highly recommend everyone takes a read through. Obviously we do have some time before we hit the job market, but she has some guiding principles to approaching the job interviews that I&rsquo;ve found useful in every day programming, too.</p>
+
+<p>When handling anything from simple to highly complicated coding challenges, best steps can include:</p>
+
+<p>1) Listen: When in an interview, listen very carefully to your interviewer. Pay attention to all aspects of the question they mention. Take notes as needed, note any particularities (are you given a hash in an array, an array in a hash, etc.), etc.</p>
+
+<p>2) Example: Whiteboard an example solution, or draw out the problem. Giving yourself visual cues, rather than simply trying to solve the problem entirely in your head, can help a great deal.</p>
+
+<p>3) Brute Force: Just solve the problem, any way you can. Hold off testing edge-cases: just get your solution in working order so that the return will be what you believe it needs to be. Then you can optimize.</p>
+
+<p>4) Optimize: Clean up your solution. Modularize it; condense it; name variables and methods clearly; use helper methods; etc.</p>
+
+<p>5) Walk Through: After you&rsquo;ve cleaned up your solution, go through it with a fine-tooth comb. Is it really clean? Test edge cases. Make sure every method is used; if it&rsquo;s not cut it. If it can be simplified, it means you&rsquo;ve still got refactoring/optimization to do.</p>
+
+<p>6) Implement: Now that you know what direction to head in, and you&rsquo;re certain it&rsquo;s the optimal one, start writing your code.</p>
+
+<p>7) Test: repeat optimize, with your code now actually written out.</p>
+
+<p>What I love most about these guiding principles is that steps 1-5 are all taken before you start coding. These mainly focus on planning and giving your code intent, making sure that your logic is sound, etc. By approaching everyday programming this way, it will be easy to extrapolate these methods and use them during your interview. Interviewers like to see how you react when a problem stumps you: do you panic? Get focused? Talk things out?</p>
+
+<p>Getting these good habits in place before the interview can certainly help make the right impression.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Super is Super Duper]]></title>
+    <link href="http://mgsterling11.github.io/blog/2015/10/19/super-is-super-duper/"/>
+    <updated>2015-10-19T22:03:52-04:00</updated>
+    <id>http://mgsterling11.github.io/blog/2015/10/19/super-is-super-duper</id>
+    <content type="html"><![CDATA[<p>As we build programs, we&rsquo;ll often find ourselves revising the blocks and compoments within our method bodies so we can improve their functionality, abstract them away, or bolster them for upscaling. By the same token, we&rsquo;ll break out functionality into multiple methods within a class, or even into new classes and modules to make the original methods more widely available to other objects in our program.</p>
+
+<p>Often, several classes or objects in a program will share method names (the initialize method in classes, as an obvious example), but by calling a method on a certain object we give Ruby the necessary lookup directions to access the right code. Knowing how method lookup works can be quite helpful, even if only so that you&rsquo;re aware of what you&rsquo;re calling when and where you call it. It&rsquo;s pretty straightforward stuff, but as a recap:</p>
+
+<p>When an object receives a message, it first looks within:</p>
+
+<ul>
+<li>Its own class to see if the method is contained there;</li>
+<li>If not, it moves on to modules mixed into its class (in reverse order of their inclusion);</li>
+<li>Next, its superclass;</li>
+<li>Then, modules mixed into the superclass (again in reverse order of their inclusion);</li>
+<li>and then all the way up to Object and BasicObject.</li>
+</ul>
+
+
+<p>A Ruby function called &ldquo;super&rdquo; makes method lookup even more interesting. Super can be cleverly employed through modules or class inheritance to yield some potentially useful results. When you call it within a method, Ruby will work its way up the method lookup chain to find another method with the same name, and will run the code contained there.</p>
+
+<p>Here&rsquo;s a quick basic example of an instance where a class and a module share method names, <em>receive_treat</em>, enabling both methods to be mixed together when super is called:</p>
+
+<figure class='code'><figcaption><span>USING RUBY'S SUPER KEYWORD</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">GiveTreat</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">receive_treat</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;One treat for you!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Dog</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">GiveTreat</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">receive_treat</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Give me a treat!&quot;</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Now, dammit!&quot;</span>
+</span><span class='line'>    <span class="k">super</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;I&#39;m one happy pup!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">happy_pup</span> <span class="o">=</span> <span class="no">Dog</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">happy_pup</span><span class="o">.</span><span class="n">receive_treat</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luckily for this pup, the output would be:</p>
+
+<p><em>Give me a treat!</em> / <em>Now, dammit!</em> / <em>One treat for you!</em> / <em>I&rsquo;m one happy pup!</em></p>
+
+<p>Another quick one, this time with class inheritance instead of a module:</p>
+
+<figure class='code'><figcaption><span>USING RUBY'S SUPER KEYWORD</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Animal</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">eat</span>
+</span><span class='line'>    <span class="s2">&quot;I eat&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Rat</span> <span class="o">&lt;</span> <span class="no">Animal</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">eat</span>
+</span><span class='line'>    <span class="k">super</span> <span class="o">+</span> <span class="s2">&quot; pizza&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bird</span> <span class="o">&lt;</span> <span class="no">Animal</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">eat</span>
+</span><span class='line'>    <span class="k">super</span> <span class="o">+</span> <span class="s2">&quot; worms&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Dog</span> <span class="o">&lt;</span> <span class="no">Animal</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">eat</span>
+</span><span class='line'>    <span class="k">super</span> <span class="o">+</span> <span class="s2">&quot; puppy chow&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">Rat</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">eat</span>
+</span><span class='line'><span class="nb">puts</span> <span class="no">Bird</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">eat</span>
+</span><span class='line'><span class="nb">puts</span> <span class="no">Dog</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">eat</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These return:</p>
+
+<p><em>I eat pizza</em> / <em>I eat worms</em> / <em>I eat puppy chow</em></p>
+
+<p>So, these are pretty silly, for sure, and it begs the question: when does super actually get used? Even more puzzling to me, <em>why would I <strong>ever</strong> use this</em>?</p>
+
+<p>Further reading demonstrated that super can be somewhat more useful (as most things are in coding), if used like this, perhaps:</p>
+
+<p>When a class object is inherited from a parent class, super can be used to instantiate the new class object with  additional or modified instance variables. Let&rsquo;s take, for example, a parent cafeteria object in a school cafeteria app that other cafeteria objects might inherit from:</p>
+
+<figure class='code'><figcaption><span>CAFETERIA PARENT OBJECT</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Cafeteria</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@cooks</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="vi">@stoves</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'>    <span class="vi">@pots</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="vi">@pans</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">make_food</span>
+</span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">clean_dishes</span>
+</span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">FlatironCafeteria</span> <span class="o">&lt;</span> <span class="no">Cafeteria</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="k">super</span>
+</span><span class='line'>    <span class="vi">@stoves</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="vi">@microwave</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="vi">@coffee_maker_that_sort_of_works</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yielding:</p>
+
+<figure class='code'><figcaption><span>CAFETERIA OBJECTS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Cafeteria</span><span class="o">.</span><span class="n">new</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="ss">Cafeteria</span><span class="p">:</span><span class="mh">0x007fb67c86e360</span> <span class="vi">@cooks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@stoves</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="vi">@pots</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@pans</span><span class="o">=</span><span class="mi">10</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">FlatironCafeteria</span><span class="o">.</span><span class="n">new</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="ss">FlatironCafeteria</span><span class="p">:</span><span class="mh">0x007fb5cc3bfb58</span> <span class="vi">@cooks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@stoves</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="vi">@pots</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@pans</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@microwave</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="vi">@coffee_maker_that_sort_of_works</span><span class="o">=</span><span class="mi">1</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case, when FlatironCafeteria is initialized using super (so Ruby knows to check the intialize method within FlatironCafeteria <em>and</em> Cafeteria), FlaitronCafeteria is initalized with all of Cafeteria&rsquo;s objects and a few newer instance variables of its own &ndash; mainly that coffee maker.</p>
+
+<p>If we didn&rsquo;t pass super in the FlatironCafeteria initialize method, though, the result would have been:</p>
+
+<figure class='code'><figcaption><span>CAFETERIA OBJECTS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Cafeteria</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="o">&lt;</span><span class="ss">Cafeteria</span><span class="p">:</span><span class="mh">0x007fc954866e40</span> <span class="vi">@cooks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@stoves</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="vi">@pots</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@pans</span><span class="o">=</span><span class="mi">10</span><span class="o">&gt;</span>
+</span><span class='line'><span class="no">FlatironCafeteria</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="o">&lt;</span><span class="ss">FlatironCafeteria</span><span class="p">:</span><span class="mh">0x007fc95486fec8</span> <span class="vi">@microwave</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="vi">@coffee_maker_that_sort_of_works</span><span class="o">=</span><span class="mi">1</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, FlatironCafeteria received none of Cafeteria&rsquo;s instance variables. Depending on our program, we may want new class objects to be initialized with their parent class&rsquo;s instance variables &ndash; super makes that happen.</p>
+
+<p>These are very basic portrayals of super usage, but this not-so-little tool can certainly come in handy when building additional functionality into our classes, modules, and programs.</p>
+
+<p>To conclude:</p>
+
+<p>It&rsquo;s a bird! It&rsquo;s a plane! It&rsquo;s&hellip; <strong>super</strong> <em>!</em></p>
+
+<p><img class="center" src="http://sensacionalista.uol.com.br/wp-content/uploads/2013/04/superman-cat-1.jpeg" width="400" title="SuperCat" alt="An image of a cat that can save the day"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Binding Pry, CLI Error Messages, and TDD]]></title>
+    <link href="http://mgsterling11.github.io/blog/2015/10/04/binding-pry/"/>
+    <updated>2015-10-04T16:59:04-04:00</updated>
+    <id>http://mgsterling11.github.io/blog/2015/10/04/binding-pry</id>
+    <content type="html"><![CDATA[<p>When I first started considering going the bootcamp route, I began to reach out to friends who are developers to ask about all things programming: did you need a CS degree to get a job?; would anyone hire me?; what kinds of jobs await junior devs who come from bootcamps?; what’s a typical career trajectory in development?; etc. I was nervous about the bootcamp route, too, because it seemed like it could go one of two ways for me: either really well, or very badly. Happily, a good friend of mine is a Flatiron alum and things turned out quite nicely for her, so I decided to take the next step and learn some code.</p>
+
+<p>Now, I needed to prove to myself that I could actually learn to code…</p>
+
+<p>For starters, I completed five or six courses in Codecademy and found myself enjoying programming – a lot. I wanted to take it a step further and write some programs on my own so I could see what it’s like to build one 100% from scratch. I built a few fun little programs, beginning with a banking program that mimics ATMs. It’s a very exciting little program: you can withdraw, deposit, and transfer money between two accounts, and you can also view your balances. Cool, right!? From there, I moved on to Rock Paper Scissors (and then Tic Tac Toe for the Flatiron app). I loved every (sometimes frustrating) minute of building each of these programs. I felt like I was making great progress in a short time, and I enjoyed the new challenge, too.</p>
+
+<p>Of course, in retrospect, I now realize I totally could have been having way more fun when writing these programs (and even while doing the Flatiron prework). I didn’t utilize tests, TDD, or binding pry to help me code. Instead, I was relying purely on the error messages my command line was giving me to see where my programs were breaking. Even during the prework, I somehow missed the memo on how powerful a tool binding pry could be; instead, I figured that the CLI error messages provided pretty much the same kind of feedback: your program is broken, here! And now here! And here, too! (Everywhere, basically.) What I somehow didn’t realize is that you could test your program before the break(s) with binding pry – nor did I realize that binding pry would let you run your code again and again until you got it working, without crashing the program.</p>
+
+<p>After one week at Flatiron, I’m already finding it much easier to remove guesswork from my coding, thanks largely to binding pry (and of course all the learning going on here!). As I write code now, I already have much clearer sense of what’s going on in my program, line by line: what the return values are going to be, what elements in iterators <em>actually</em> correspond to, how deep I actually need to iterate, etc. Binding pry and the command line error message have already helped me to speed up my coding significantly, and I know it’ll only get faster. I’m very excited.</p>
+]]></content>
+  </entry>
+  
+</feed>
