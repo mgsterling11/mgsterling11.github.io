@@ -27,7 +27,7 @@ footer: true
 <li> Features Yelp API to connect users restaurant reviews/ratings; Google Maps API to display restaurant location</li>
 <li> Migrated initial version of application from a local database to API reliance to source most accurate/recent data</li>
 <br>
-
+ 
 <a href"http://get-cookin.herokuapp.com/">Get Cookin’</a> - A Rails application to share personal recipes with friends and family
 <li> Implements nested tables structure in database to perform advanced ActiveRecord queries & CRUD functionality</li>
 <li> Utilizes AJAX to asynchronously perform full CRUD actions on stored recipes without page reload</li>
