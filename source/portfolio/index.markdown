@@ -28,7 +28,7 @@ footer: true
 <li> Migrated initial version of application from a local database to API reliance to source most accurate/recent data</li>
 <br>
  
-<a href"http://get-cookin.herokuapp.com/">Get Cookin’</a> - A Rails application to share personal recipes with friends and family
+<a href="http://get-cookin.herokuapp.com/">Get Cookin’</a> - A Rails application to share personal recipes with friends and family
 <li> Implements nested tables structure in database to perform advanced ActiveRecord queries & CRUD functionality</li>
 <li> Utilizes AJAX to asynchronously perform full CRUD actions on stored recipes without page reload</li>
 <li> Features user-driven permissions so that only a recipe’s creator can update/delete a recipe; features an admin page so that site developers can monitor custom analytics</li>
