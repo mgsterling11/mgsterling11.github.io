@@ -17,5 +17,16 @@ The tech world drew me in when I forged a relationship between my company and a 
 I made the move to Flatiron School to learn to code professionally and jump into a new career. I'm looking forward to contributing to many great projects and initiatives.
 </p>
 <p>
-Thanks for stopping by!
+  Contact me:
 </p>
+
+<p>
+  <a href="mailto:m.g.sterling11@gmail.com" target="blank">Email</a> (m.g.sterling11@gmail.com)
+</p>
+<p>
+  <a href="https://www.linkedin.com/in/michael-sterling-37298418">LinkedIn</a>
+</p>
+<p>
+  <a href="https://github.com/mgsterling11/">GitHub</a>
+</p>
+
