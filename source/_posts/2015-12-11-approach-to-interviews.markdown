@@ -8,9 +8,6 @@ categories: interviews
 
 We're now over two thirds of the way through our Flatiron experience. As we continue to barrel ahead through new material, we're confronting the reality that we'll all be on the job market very(!) soon, and will need to be representing ourselves as professional, ableit beginner, programmers. This can be pretty daunting, for many reasons. Many current developers experience Imposter Syndrome, the classic "everyone else is better than me" mindset, so it's easy to imagine a bootcamp grad can experience the same misgivings. 
 
-{% img center https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2012/06/07/CapitalBusiness/Graphics/careercoach11.jpg?uuid=DAAziLDWEeGw96SQqoz3hw  700 ' %}
-
-
 As we're heading toward the finish line for the program, I've been thinking a lot about the interview process. To better prepare for the techinical compoment,  I've been working hard to incorporate better habits (i.e. best practices) not only into my code, but the way I approach development, problem solving, and finding a best solution/algorithm.
 
 Gayle Laakmann McDowell, author of CRACKING THE CODING INTERVIEW, offers excellent advice for all parts of the job interview (especially the technical component(s). The book, which has been recommended as a must-read by every developer I've spoken with, is one I highly recommend everyone takes a read through. Obviously we do have some time before we hit the job market, but she has some guiding principles to approaching the job interviews that I've found useful in every day programming, too. 
