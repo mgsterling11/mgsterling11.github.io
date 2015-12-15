@@ -22,7 +22,7 @@ footer: true
 <li> Customized Jquery event handlers & CSS to build dynamic user interface and site design</li>
 <br>
 
-<a href="https://github.com/mgsterling11/gradepending">GradePending</a> - A Rails open-data application to view official NYC restaurant health inspection results 
+<a href="http://gradepending.herokuapp.com/">GradePending</a> - A Rails open-data application to view official NYC restaurant health inspection results 
 <li> Utilizes New York City Open Data API to return information to users via flexible searches</li>
 <li> Features Yelp API to connect users restaurant reviews/ratings; Google Maps API to display restaurant location</li>
 <li> Migrated initial version of application from a local database to API reliance to source most accurate/recent data</li>
